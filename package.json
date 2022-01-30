@@ -1,5 +1,5 @@
 {
-  "name": "pinger",
+  "name": "@hystleria/pinger",
   "version": "1.0.0",
   "description": "A simple website pinger!",
   "main": "src/index.js",
