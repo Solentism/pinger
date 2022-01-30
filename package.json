@@ -1,0 +1,30 @@
+{
+  "name": "pinger",
+  "version": "1.0.0",
+  "description": "A simple website pinger!",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hystleria/pinger.git"
+  },
+  "keywords": [
+    "ping",
+    "websitepinger",
+    "pinger"
+  ],
+  "author": "Kieran Schuler",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hystleria/pinger/issues"
+  },
+  "homepage": "https://github.com/hystleria/pinger#readme",
+  "dependencies": {
+    "axios": "^0.25.0",
+    "bluebird": "^3.7.2",
+    "chalk": "^5.0.0"
+  },
+  "private": false
+}
