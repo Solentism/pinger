@@ -16,3 +16,10 @@ pinger.ping("https://kie.lol")
 const pinger = require('@hystleria/pinger')
 pinger.ping("https://kie.lol", 10000)
 ```
+
+# Example Code (With Logging)
+
+```js
+const pinger = require('@hystleria/pinger')
+pinger.ping("https://kie.lol", 30000, true)
+```

@@ -5,15 +5,13 @@ const axios = require('axios');
  * @param website The website to ping
  * @param interval The interval per ping (in milli-seconds)
  * @example
- * const ping = require("@hystleria/pinger")
- * ping("kie.lol", 60000, 80)
+ * const pinger = require("@hystleria/pinger")
+ * pinger.ping("kie.lol", 60000, true)
  */
 
-const ping = async function (url, interval) {
+const ping = async function (url, interval, logging) {
     if(!interval) interval = 30000
     if(!url) return console.log(`[🏓 @hystleria/pinger] You must specify a URL.`)
-
-    let logging = true;
 
     if(logging == true){
         console.log(`[🏓 @hystleria/pinger] Currently logging pings for ${url} with the interval ${interval}.`)
@@ -38,7 +36,9 @@ const ping = async function (url, interval) {
             },
         })
 
-        console.log(`[🏓 @hystleria/pinger] Successfully pinged ${url}`);
+        if(logging == true){
+            console.log(`[🏓 @hystleria/pinger] Successfully pinged ${url}`);   
+        };
 
     }, interval)
 }
