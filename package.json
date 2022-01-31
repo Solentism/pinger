@@ -1,6 +1,6 @@
 {
   "name": "@hystleria/pinger",
-  "version": "1.0.0-4",
+  "version": "1.0.0-5",
   "description": "A simple website pinger!",
   "main": "src/index.js",
   "scripts": {
@@ -13,7 +13,11 @@
   "keywords": [
     "ping",
     "websitepinger",
-    "pinger"
+    "pinger",
+    "replituptime",
+    "glitchuptime",
+    "replit",
+    "glitch"
   ],
   "author": "Kieran Schuler",
   "license": "ISC",
