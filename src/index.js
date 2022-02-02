@@ -10,24 +10,26 @@ const axios = require('axios');
  */
 
 const ping = async function (url, interval, logging) {
-    if(!interval) interval = 30000
-    if(!url) return console.log(`[🏓 @hystleria/pinger] You must specify a URL.`)
+    let count = 1;
+    
+    if (!interval) interval = 30000;
+    if (!url) return console.log(`[🏓 @hystleria/pinger] You must specify a URL.`);
 
-    if(logging == true){
-        console.log(`[🏓 @hystleria/pinger] Currently logging pings for ${url} with the interval ${interval}.`)
+    if (logging == true){
+        console.log(`[🏓 @hystleria/pinger] Currently logging pings for ${url} with the interval ${interval}.`);
     }
 
     function URLValidity(string) {
         try {
             new URL(string);
-        } catch (_) {
+        } catch {
             return false;
         }
 
         return true;
     }
 
-    if(URLValidity(url) !== true || encodeURIComponent(url).includes("%3C" || "%3E" || "%20")) return console.log(`[🏓 @hystleria/pinger] You must specify a valid URL.`);
+    if (URLValidity(url) !== true || encodeURIComponent(url).includes("%3C" || "%3E" || "%20")) return console.log(`[🏓 @hystleria/pinger] You must specify a valid URL.`);
 
     setInterval(async () => {
         const response = await axios.get(url, {
@@ -36,13 +38,13 @@ const ping = async function (url, interval, logging) {
             },
         })
 
-        if(logging == true){
-            console.log(`[🏓 @hystleria/pinger] Successfully pinged ${url}`);   
+        if (logging === true) {
+            const d = new Date();
+            console.log(`[🏓 @hystleria/pinger] [${d.getMonth()}/${d.getDate()} ${d.getHours()}:${d.getMinutes()}:${d.getSeconds()}] Successfully pinged ${url} -> Ping#${count}`);
         };
-
-    }, interval)
+        
+        count++;
+    }, interval);
 }
 
-module.exports = {
-    ping
-}
+module.exports = {ping};
