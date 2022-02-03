@@ -42,7 +42,7 @@ const ping = async function (url, interval, logging=true, flipDM=false, noURLFix
     const dm = (m,d)=>flipDM?`${ps(d)}/${ps(m)}`:`${ps(m)}/${ps(d)}`;
 
 
-    setInterval(async () => {
+    return setInterval(async () => {
         await axios.get(url, {
             headers: {
                 'User-Agent': '@hystleria/pinger'
@@ -59,4 +59,104 @@ const ping = async function (url, interval, logging=true, flipDM=false, noURLFix
     }, interval);
 }
 
-module.exports = {ping};
+class Group {
+    name;
+    pingers = new Map();
+
+    constructor(name="Pinger Group") {
+        this.name = name;
+    }
+
+    startAll() {
+        this.pingers.forEach(ping => {if (!ping.started) {ping.start();}});
+    };
+
+    add(url, interval, logging=true, flipDM=false, noURLFix=false) {
+        const id = this.pingers.size + 1;
+        let ping = {
+            name: null,
+            id,
+            config: {url, interval, logging, flipDM, noURLFix},
+            ping: async function(url, interval, logging=true, flipDM=false, noURLFix=false) {
+                let count = 1;
+                const pf = `[🏓 @hystleria/pinger] [${this.name}] [${this.id}]`;
+                
+                if (!interval) interval = 30000;
+                if (!url) return console.log(`${pf} You must specify a URL.`);
+            
+                if (!url.startsWith('http://') && !url.startsWith('https://') && !noURLFix) {url = `https://${url}`;}
+            
+                if (URLValidity(url) !== true || encodeURIComponent(url).includes("%3C" || "%3E" || "%20")) {
+                    return console.log(`${pf} You must specify a valid URL.`);
+                }
+            
+                if (logging == true) {
+                    console.log(`${pf} Currently logging pings for ${url} with the interval ${interval}.`);
+                }
+            
+                function URLValidity(string) {
+                    try {
+                        new URL(string);
+                    } catch {
+                        return false;
+                    }
+            
+                    return true;
+                }
+            
+                const ps = t=>`${t}`.padStart(2, '0');
+                const dm = (m,d)=>flipDM?`${ps(d)}/${ps(m)}`:`${ps(m)}/${ps(d)}`;
+            
+            
+                return setInterval(async () => {
+                    await axios.get(url, {
+                        headers: {
+                            'User-Agent': '@hystleria/pinger'
+                        },
+                    })
+                    .catch(e => console.log(`${pf} [${dm(d.getMonth() + 1, d.getDate())} ${ps(d.getHours())}:${ps(d.getMinutes())}:${ps(d.getSeconds())}] Failed to ping ${url}. Error: `, e));
+            
+                    if (logging === true) {
+                        const d = new Date();
+                        console.log(`${pf} [${dm(d.getMonth() + 1, d.getDate())} ${ps(d.getHours())}:${ps(d.getMinutes())}:${ps(d.getSeconds())}] Successfully pinged ${url} -> Ping #${count}`);
+                    };
+                    
+                    count++;
+                }, interval);
+            },
+            interval: null,
+            stop: null,
+            started: false,
+            start: null
+        };
+        ping.name = this.name;
+        ping.start = () => {
+            const tp = ping.ping(ping.config.url, ping.config.interval, ping.config.logging, ping.config.flipDM, ping.config.noURLFix);
+            if (!tp) {return;}
+            ping.interval = tp;
+            ping.stop = () => {
+                clearInterval(ping.interval);
+                if (ping.config.logging) {console.log();}
+            }
+            ping.started = true;
+        };
+
+        console.log(`[🏓 @hystleria/pinger] [${ping.name}] Added pinger for ${ping.config.url} into group.`);
+
+        this.pingers.set(id, ping);
+        return ping;
+    };
+
+    addStart(url, interval, logging=true, flipDM=false, noURLFix=false) {
+        this.add(url, interval, logging, flipDM, noURLFix).start();
+    };
+
+    stop(id=undefined) {
+        if (id) {if (this.pingers.has(id) && this.pingers.get(id).started) {this.pingers.get(id).stop();}}
+        else {
+            this.pingers.forEach(ping => {if (ping.started) {ping.stop();}});
+        }
+    };
+};
+
+module.exports = {ping, Group};
