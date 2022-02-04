@@ -43,6 +43,7 @@ const ping = async function (url, interval, logging=true, flipDM=false, noURLFix
 
 
     return setInterval(async () => {
+        const d = new Date();
         await axios.get(url, {
             headers: {
                 'User-Agent': '@hystleria/pinger'
@@ -51,7 +52,6 @@ const ping = async function (url, interval, logging=true, flipDM=false, noURLFix
         .catch(e => console.log(`[🏓 @hystleria/pinger] [${dm(d.getMonth() + 1, d.getDate())} ${ps(d.getHours())}:${ps(d.getMinutes())}:${ps(d.getSeconds())}] Failed to ping ${url}. Error: `, e));
 
         if (logging === true) {
-            const d = new Date();
             console.log(`[🏓 @hystleria/pinger] [${dm(d.getMonth() + 1, d.getDate())} ${ps(d.getHours())}:${ps(d.getMinutes())}:${ps(d.getSeconds())}] Successfully pinged ${url} -> Ping #${count}`);
         };
         
@@ -114,7 +114,10 @@ class Group {
                             'User-Agent': '@hystleria/pinger'
                         },
                     })
-                    .catch(e => console.log(`${pf} [${dm(d.getMonth() + 1, d.getDate())} ${ps(d.getHours())}:${ps(d.getMinutes())}:${ps(d.getSeconds())}] Failed to ping ${url}. Error: `, e));
+                    .catch(e => {
+                        const d = new Date();
+                        console.log(`${pf} [${dm(d.getMonth() + 1, d.getDate())} ${ps(d.getHours())}:${ps(d.getMinutes())}:${ps(d.getSeconds())}] Failed to ping ${url}. Error: `, e);
+                    });
             
                     if (logging === true) {
                         const d = new Date();
