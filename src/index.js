@@ -1,6 +1,14 @@
 const axios = require('axios');
 
 /**
+ * Copyright (c) 2022, Kieran S or/name hystleria & WubzyGD
+ *
+ * https://github.com/hystleria/pinger
+ * 
+ * This code is subject to the BSD 3-Clause "New" or "Revised" License authored by Regents of the University of California.
+ * Information about this license can be found in the LICENSE.md file.
+ 
+ 
  * Ping a website
  * @param website The website to ping
  * @param interval The interval per ping (in milli-seconds)
