@@ -1,7 +1,7 @@
 const axios = require('axios');
 
 /**
- * Copyright (c) 2022, Kieran S or/name hystleria & WubzyGD
+ * Copyright (c) 2022, Kieran Schuler (hystleria // kieran@kie.lol)
  *
  * https://github.com/hystleria/pinger
  * 
