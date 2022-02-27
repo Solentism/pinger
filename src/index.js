@@ -1,4 +1,8 @@
 const axios = require('axios');
+const express = require('express');
+
+const app = express();
+app.use(express.static("public"));
 
 /**
  * Copyright (c) 2022, Kieran Schuler (hystleria // kieran@kie.lol)
@@ -65,6 +69,22 @@ const ping = async function (url, interval, logging=true, flipDM=false, noURLFix
         
         count++;
     }, interval);
+}
+
+const webserver = async function (port, flipDM=false) {
+    
+    app.get('*', (req, res) => {
+        res.json('[🏓 @hystleria/pinger] Actively listening for requests. If logging is enabled, check your terminal.')
+    });
+    
+    const listener = app.listen(port, () => {
+        const d = new Date();
+
+        const ps = t=>`${t}`.padStart(2, '0');
+        const dm = (m,d)=>flipDM?`${ps(d)}/${ps(m)}`:`${ps(m)}/${ps(d)}`;
+
+        console.log(`[🏓 @hystleria/pinger] [${dm(d.getMonth() + 1, d.getDate())} ${ps(d.getHours())}:${ps(d.getMinutes())}:${ps(d.getSeconds())}] Webserver listening on port ${port}`);
+    });
 }
 
 class Group {
@@ -170,4 +190,4 @@ class Group {
     };
 };
 
-module.exports = {ping, Group};
+module.exports = {ping, Group, webserver};

@@ -2,7 +2,7 @@
 
 A basic yet functional website pinger, you can use this to keep repl.it, Glitch or other similar project sites online 24/7!
 
-[NPM](https://nodei.co/npm/@hystleria/pinger)]
+[NPM](https://nodei.co/npm/@hystleria/pinger)
 
 # Example Code (Interval = 30000)
 
@@ -47,4 +47,11 @@ group.stop(id); //id is optional. if there is no id present, it will stop all pi
 group.startAll(); //starts all unstarted pingers in the group
 
 group.pingers //Map<number, pinger>
+```
+
+## Webserver
+
+```js
+const pinger = require('@hystleria/pinger');
+pinger.webserver(3000) // Replace 3000 with the port of your choice.
 ```
