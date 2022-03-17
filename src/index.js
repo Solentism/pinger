@@ -58,7 +58,7 @@ const ping = async function (url, interval, logging=true, flipDM=false, noURLFix
         const d = new Date();
         await axios.get(url, {
             headers: {
-                'User-Agent': '@hystleria/pinger'
+                'User-Agent': '@hystleria/pingerV2'
             },
         })
         .catch(e => console.log(`[🏓 @hystleria/pinger] [${dm(d.getMonth() + 1, d.getDate())} ${ps(d.getHours())}:${ps(d.getMinutes())}:${ps(d.getSeconds())}] Failed to ping ${url}. Error: `, e));
@@ -86,7 +86,6 @@ const webserver = async function (port, flipDM=false) {
         console.log(`[🏓 @hystleria/pinger] [${dm(d.getMonth() + 1, d.getDate())} ${ps(d.getHours())}:${ps(d.getMinutes())}:${ps(d.getSeconds())}] Webserver listening on port ${port}`);
     });
 }
-
 class Group {
     name;
     pingers = new Map();
