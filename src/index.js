@@ -21,7 +21,7 @@ app.use(express.static("public"));
  * @param noURLFix If you're pinging a non-http/https url, set this to true
  * @example
  * const pinger = require("@hystleria/pinger")
- * pinger.ping("kie.lol", 60000, true)
+ * pinger.ping("k1e.io", 60000, true)
  */
 
 const ping = async function (url, interval, logging=true, flipDM=false, noURLFix=false) {
