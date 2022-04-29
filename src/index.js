@@ -14,11 +14,11 @@ app.use(express.static("public"));
  
  
  * Ping a website
- * @param website The website to ping
- * @param interval The interval per ping (in milli-seconds)
- * @param logging Enable logging
- * @param flipDM Flip the month/day to day/month in the log
- * @param noURLFix If you're pinging a non-http/https url, set this to true
+ * @param {website} The website to ping
+ * @param {interval} The interval per ping (in milli-seconds)
+ * @param {logging} Enable logging
+ * @param {flipDM} Flip the month/day to day/month in the log
+ * @param {noURLFix} If you're pinging a non-http/https url, set this to true
  * @example
  * const pinger = require("@hystleria/pinger")
  * pinger.ping("k1e.io", 60000, true)
