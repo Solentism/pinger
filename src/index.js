@@ -5,7 +5,7 @@ const app = express();
 app.use(express.static("public"));
 
 /**
- * Copyright (c) 2022, Kieran Schuler (hystleria // kieran@kie.lol)
+ * Copyright (c) 2022, Kieran Schuler (hystleria // kieran@k1e.io)
  *
  * https://github.com/hystleria/pinger
  * 
