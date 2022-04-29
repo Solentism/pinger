@@ -8,20 +8,20 @@ A basic yet functional website pinger, you can use this to keep repl.it, Glitch 
 
 ```js
 const pinger = require('@hystleria/pinger');
-pinger.ping("https://kie.lol")
+pinger.ping("https://k1e.io")
 ```
 # Example Code (Interval = Custom)
 
 ```js
 const pinger = require('@hystleria/pinger');
-pinger.ping("https://kie.lol", 10000)
+pinger.ping("https://k1e.io", 10000)
 ```
 
 # Example Code (With Logging)
 
 ```js
 const pinger = require('@hystleria/pinger');
-pinger.ping("https://kie.lol", 30000, true)
+pinger.ping("https://k1e.io", 30000, true)
 ```
 
 # Example Code (Pinger Group)
@@ -31,7 +31,7 @@ Pinger Group allows you to ping several domains at the same time!
 const { Group } = require('@hystleria/pinger');
 let groupPinger = new Group(); //You can pass a string to name the group if you have multiple groups
 
-['wubzy.xyz', 'kie.lol', 'git.wubzy.xyz'].forEach(u => groupPinger.add(u, 5000));
+['wubzy.xyz', 'k1e.io', 'git.wubzy.xyz'].forEach(u => groupPinger.add(u, 5000));
 groupPinger.startAll();
 ```
 
