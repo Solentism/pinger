@@ -12,7 +12,6 @@ app.use(express.static("public"));
  * This code is subject to the BSD 3-Clause "New" or "Revised" License authored by Regents of the University of California.
  * Information about this license can be found in the LICENSE.md file.
  
- 
  * Ping a website
  * @param {website} The website to ping
  * @param {interval} The interval per ping (in milli-seconds)
@@ -58,7 +57,7 @@ const ping = async function (url, interval, logging=true, flipDM=false, noURLFix
         const d = new Date();
         await axios.get(url, {
             headers: {
-                'User-Agent': '@hystleria/pingerV2'
+                'User-Agent': '@hystleria/pinger'
             },
         })
         .catch(e => console.log(`[🏓 @hystleria/pinger] [${dm(d.getMonth() + 1, d.getDate())} ${ps(d.getHours())}:${ps(d.getMinutes())}:${ps(d.getSeconds())}] Failed to ping ${url}. Error: `, e));

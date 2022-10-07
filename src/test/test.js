@@ -4,5 +4,5 @@ pinger.webserver(8080)
 
 const {Group} = require('../index');
 let g = new Group();
-['wubzy.xyz', 'k1e.io', 'git.wubzy.xyz'].forEach(u => g.add(u, 5000));
+['wubzy.xyz', 'k1e.io'].forEach(u => g.add(u, 5000));
 g.startAll();

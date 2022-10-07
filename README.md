@@ -31,7 +31,7 @@ Pinger Group allows you to ping several domains at the same time!
 const { Group } = require('@hystleria/pinger');
 let groupPinger = new Group(); //You can pass a string to name the group if you have multiple groups
 
-['wubzy.xyz', 'k1e.io', 'git.wubzy.xyz'].forEach(u => groupPinger.add(u, 5000));
+['wubzy.xyz', 'k1e.io'].forEach(u => groupPinger.add(u, 5000));
 groupPinger.startAll();
 ```
 
