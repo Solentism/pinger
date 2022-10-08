@@ -55,3 +55,10 @@ group.pingers //Map<number, pinger>
 const pinger = require('@hystleria/pinger');
 pinger.webserver(3000) // Replace 3000 with the port of your choice.
 ```
+
+## Webserver (with Custom Splash)
+
+```js
+const pinger = require('@hystleria/pinger');
+pinger.webserver(3000, 'Welcome to my webserver!') // Replace 'Your content here with HTML code or general text.'
+```

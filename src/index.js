@@ -70,10 +70,14 @@ const ping = async function (url, interval, logging=true, flipDM=false, noURLFix
     }, interval);
 }
 
-const webserver = async function (port, flipDM=false) {
+const webserver = async function (port, content, flipDM=false) {
     
     app.get('*', (req, res) => {
-        res.json('[🏓 @hystleria/pinger] Actively listening for requests. If logging is enabled, check your terminal.')
+        if (!content) { 
+            res.json('[🏓 @hystleria/pinger] Actively listening for requests. If logging is enabled, check your terminal.')
+        } else {
+            res.send(content)
+        }
     });
     
     const listener = app.listen(port, () => {
