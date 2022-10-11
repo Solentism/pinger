@@ -1,6 +1,6 @@
 {
   "name": "@hystleria/pinger",
-  "version": "2.0.4",
+  "version": "2.0.4-1",
   "description": "A simple website pinger!",
   "main": "src/index.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hystleria/pinger.git"
+    "url": "git+https://github.com/picturebooks/pinger.git"
   },
   "keywords": [
     "ping",
@@ -22,9 +22,9 @@
   "author": "Kieran Schuler",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/hystleria/pinger/issues"
+    "url": "https://github.com/picturebooks/pinger/issues"
   },
-  "homepage": "https://github.com/hystleria/pinger#readme",
+  "homepage": "https://github.com/picturebooks/pinger#readme",
   "dependencies": {
     "axios": "^0.25.0",
     "express": "^4.17.3"

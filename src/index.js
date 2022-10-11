@@ -21,6 +21,15 @@ app.use(express.static("public"));
  * @example
  * const pinger = require("@hystleria/pinger")
  * pinger.ping("k1e.io", 60000, true)
+ * 
+ * Start a webserver
+ * @param {port} The port in which you want the webserver to run on
+ * @param {content} The content to display on the page, if no content is provided, it will be autofilled.
+ * @param {flipDM} Flip the date and the month to other formats (American & British)
+ * @example 
+ * const pinger= require("@hystleria/pinger")
+ * pinger.webserver(9005, "Welcome!", true)
+ * 
  */
 
 const ping = async function (url, interval, logging=true, flipDM=false, noURLFix=false) {
