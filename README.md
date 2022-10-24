@@ -24,6 +24,13 @@ const pinger = require('@hystleria/pinger');
 pinger.ping("https://k1e.io", 30000, true)
 ```
 
+# Example Code (Discord Logging)
+```js
+const pinger = require('@hystleria/pinger');
+pinger.dping(webhooktoken='V8LP8mnbnCkJqdwWZrCs7ib9xVnihhiXheAWRPHnrkZt6', webhookid='109337362537264548', url='https://k1e.io')
+```
+This method will not let you set an interval below 10000 due to Discord's rate limiting.
+
 # Example Code (Pinger Group)
 Pinger Group allows you to ping several domains at the same time!
 

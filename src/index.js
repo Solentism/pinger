@@ -1,5 +1,6 @@
 const axios = require('axios');
 const express = require('express');
+const WebhookClient = require('discord.js').WebhookClient;
 
 const app = express();
 app.use(express.static("public"));
@@ -98,6 +99,59 @@ const webserver = async function (port, content, flipDM=false) {
         console.log(`[🏓 @hystleria/pinger] [${dm(d.getMonth() + 1, d.getDate())} ${ps(d.getHours())}:${ps(d.getMinutes())}:${ps(d.getSeconds())}] Webserver listening on port ${port}`);
     });
 }
+
+const dping = async function (webhooktoken, webhookid, url, interval, flipDM=false, noURLFix=false) {
+    let count = 1;
+
+    if(!webhooktoken) return console.log(`[🏓 @hystleria/pinger] You must specify a webhook token. If you don't want Discord logging, use the .ping method.`);
+    if(!webhookid) return console.log(`[🏓 @hystleria/pinger] You must specify a webhook id. If you don't want Discord logging, use the .ping method.`);
+
+    if (!interval) interval = 30000;
+    if (!url) return console.log(`[🏓 @hystleria/pinger] You must specify a URL.`);
+
+    if (interval < 10000) return console.log(`[🏓 @hystleria/pinger] Due to Discord's API rate limiting, you cannot send more than one request in under 10 seconds. Try using an interval of 10000 or more.`);
+
+    if (!url.startsWith('http://') && !url.startsWith('https://') && !noURLFix) {url = `https://${url}`;}
+
+    if (URLValidity(url) !== true || encodeURIComponent(url).includes("%3C" || "%3E" || "%20")) {
+        return console.log(`[🏓 @hystleria/pinger] You must specify a valid URL.`);
+    }
+
+    console.log(`[🏓 @hystleria/pinger] Currently logging pings for ${url} with the interval ${interval}. Please check your Discord channel connected to the webhook.`);
+
+    function URLValidity(string) {
+        try {
+            new URL(string);
+        } catch {
+            return false;
+        }
+
+        return true;
+    }
+
+    const ps = t=>`${t}`.padStart(2, '0');
+    const dm = (m,d)=>flipDM?`${ps(d)}/${ps(m)}`:`${ps(m)}/${ps(d)}`;
+
+
+    return setInterval(async () => {
+        const d = new Date();
+        await axios.get(url, {
+            headers: {
+                'User-Agent': 'npmjs.org/@hystleria/pinger'
+            },
+        })
+        .catch(e => console.log(`[🏓 @hystleria/pinger] [${dm(d.getMonth() + 1, d.getDate())} ${ps(d.getHours())}:${ps(d.getMinutes())}:${ps(d.getSeconds())}] Failed to ping ${url}. Error: `, e));
+
+        const webhookClient = new WebhookClient({ id: webhookid, token: webhooktoken });
+        webhookClient.send({
+            content: `[🏓 @hystleria/pinger] [${dm(d.getMonth() + 1, d.getDate())} ${ps(d.getHours())}:${ps(d.getMinutes())}:${ps(d.getSeconds())}] Successfully pinged <${url}> -> Ping #${count}`,
+            username: '@hystleria/pinger Logging'
+        });
+        
+        count++;
+    }, interval);
+}
+
 class Group {
     name;
     pingers = new Map();
@@ -201,4 +255,4 @@ class Group {
     };
 };
 
-module.exports = {ping, Group, webserver};
+module.exports = {ping, Group, webserver, dping};
