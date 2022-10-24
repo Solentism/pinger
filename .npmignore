@@ -1,0 +1,5 @@
+src/
+.github/
+src/**/*
+.github/**/*
+test.js

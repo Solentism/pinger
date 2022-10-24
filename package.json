@@ -2,7 +2,7 @@
   "name": "@hystleria/pinger",
   "version": "2.1.0",
   "description": "A simple website pinger!",
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
